@@ -386,7 +386,7 @@ void myallocator<T>::deallocate(void*__p, size_t __n)
 		// 找到相应的freelist成员
 		_Obj* volatile* _my_free_list = _S_free_list + _S_fresslist_index(__n);
 		_Obj* __q = (_Obj*)__p;
-		// 将这块内存头插法插入,对_S_free_list进行操作需要考虑线程安全问题
+		// 将这块内存头插法插入,对_S_free_list进行操作需要考虑线程安全问题p
 		std::unique_lock<std::mutex> lck(mtx);
 		__q->_M_free_list_link = *_my_free_list;
 		*_my_free_list = __q;
